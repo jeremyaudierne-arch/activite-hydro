@@ -4,17 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Arbitrage CLE : Sauver le radier du Moulin</title>
-
-  <!-- Configuration et chargement de MathJax pour le rendu LaTeX -->
-  <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['$', '$']]
-      }
-    };
-  </script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
   <style>
     :root {
       --primary: #1976d2;
@@ -80,8 +69,8 @@
       <div class="card">
         <h3>Profil A (50 m amont — remous)</h3>
         <div class="metric">Largeur : <strong>6,00 m</strong> | Profondeur : <strong>1,10 m</strong></div>
-        <div class="metric">Section mouillée ($S_1$) : <strong>6,60 m²</strong></div>
-        <div class="metric">Vitesse moyenne ($V_1$) : <strong>0,09 m/s</strong></div>
+        <div class="metric">Section mouillée (S<sub>1</sub>) : <strong>6,60 m²</strong></div>
+        <div class="metric">Vitesse moyenne (V<sub>1</sub>) : <strong>0,09 m/s</strong></div>
         <div class="metric">Substrat : Limons et vases fines</div>
         <div class="metric">Colmatage du fond : <span class="highlight">85 %</span></div>
         <div class="badge" style="margin-top:8px;">Faciès : Mouille homogène</div>
@@ -89,8 +78,8 @@
       <div class="card">
         <h3>Profil B (80 m aval — témoin)</h3>
         <div class="metric">Largeur : <strong>3,20 m</strong> | Profondeur : <strong>0,32 m</strong></div>
-        <div class="metric">Section mouillée ($S_2$) : <strong>1,02 m²</strong></div>
-        <div class="metric">Vitesse moyenne ($V_2$) : <strong>0,58 m/s</strong></div>
+        <div class="metric">Section mouillée (S<sub>2</sub>) : <strong>1,02 m²</strong></div>
+        <div class="metric">Vitesse moyenne (V<sub>2</sub>) : <strong>0,58 m/s</strong></div>
         <div class="metric">Substrat : Sables, graviers et galets</div>
         <div class="metric">Colmatage du fond : <strong>&lt; 10 %</strong></div>
         <div class="badge" style="margin-top:8px;">Faciès : Radier vif</div>
@@ -100,17 +89,17 @@
 
   <!-- Étape 2 : Calcul -->
   <div class="tab-content" id="tab-1">
-    <h2>Vérification du débit ($Q = S \cdot V$)</h2>
+    <h2>Vérification du débit (Q = S · V)</h2>
     <div class="calc-box">
       <p style="margin-bottom: 12px; font-size: 0.9rem;">
         Calculez le débit pour chaque profil à l'aide de la formule du cours :
       </p>
       <div style="margin-bottom: 8px;">
-        <label>Débit amont ($Q_1 = 6{,}60 \times 0{,}09$) : </label>
+        <label>Débit amont (Q<sub>1</sub> = 6,60 × 0,09) : </label>
         <input type="number" id="q1-input" step="0.01" placeholder="m³/s">
       </div>
       <div style="margin-bottom: 8px;">
-        <label>Débit aval ($Q_2 = 1{,}02 \times 0{,}58$) : </label>
+        <label>Débit aval (Q<sub>2</sub> = 1,02 × 0,58) : </label>
         <input type="number" id="q2-input" step="0.01" placeholder="m³/s">
       </div>
       <button class="action-btn" onclick="checkFlow()">Vérifier les calculs</button>
