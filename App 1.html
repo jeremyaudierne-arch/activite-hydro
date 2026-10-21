@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arbitrage CLE : Sauver le radier du Moulin</title>
+  <style>
+    :root {
+      --primary: #1976d2;
+      --accent: #2e7d32;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --border: #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding: 20px; display: flex; justify-content: center; }
+    .container { width: 100%; max-width: 900px; background: var(--card-bg); border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border: 1px solid var(--border); overflow: hidden; }
+    header { background: var(--primary); color: white; padding: 20px; text-align: center; }
+    header h1 { font-size: 1.4rem; margin-bottom: 6px; }
+    header p { font-size: 0.9rem; opacity: 0.9; }
+    .tabs { display: flex; border-bottom: 1px solid var(--border); background: #f1f5f9; }
+    .tab-btn { flex: 1; padding: 12px; border: none; background: none; font-weight: 600; font-size: 0.85rem; cursor: pointer; color: #64748b; transition: all 0.2s; }
+    .tab-btn.active { color: var(--primary); background: var(--card-bg); border-bottom: 3px solid var(--primary); }
+    .tab-content { display: none; padding: 24px; animation: fadeIn 0.3s ease; }
+    .tab-content.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+    .card { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+    .card h3 { font-size: 1rem; margin-bottom: 10px; color: var(--primary); }
+    .metric { font-size: 0.9rem; margin-bottom: 6px; }
+    .highlight { font-weight: bold; color: #d32f2f; }
+    .calc-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 16px; margin: 16px 0; }
+    input[type="number"] { width: 90px; padding: 6px 8px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.9rem; }
+    button.action-btn { background: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; margin-top: 8px; }
+    button.action-btn:hover { opacity: 0.9; }
+    .roles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+    .role-card { border-radius: 8px; padding: 14px; border-left: 5px solid; background: #f8fafc; }
+    .role-gemapi { border-color: #0284c7; }
+    .role-peche { border-color: #16a34a; }
+    .role-riverain { border-color: #ea580c; }
+    .role-police { border-color: #dc2626; }
+    .role-title { font-weight: bold; font-size: 0.95rem; margin-bottom: 6px; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; background: #e2e8f0; margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Arbitrage en CLE : Le radier du Moulin</h1>
+    <p>Session technique et réglementaire — Bassin versant de l'Orge</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="openTab(0)">1. Diagnostic terrain</button>
+    <button class="tab-btn" onclick="openTab(1)">2. Calcul de débit</button>
+    <button class="tab-btn" onclick="openTab(2)">3. Cadre légal</button>
+    <button class="tab-btn" onclick="openTab(3)">4. Jeu de rôle (CLE)</button>
+  </div>
+
+  <!-- Étape 1 : Diagnostic -->
+  <div class="tab-content active" id="tab-0">
+    <h2>Relevés des stations de mesure</h2>
+    <p style="margin: 8px 0; font-size: 0.9rem; color: #64748b;">
+      Un ancien clapet de moulin (chute : 1,40 m) perturbe le tronçon. Deux profils ont été mesurés à l'étiage :
+    </p>
+    <div class="grid">
+      <div class="card">
+        <h3>Profil A (50 m amont — remous)</h3>
+        <div class="metric">Largeur : <strong>6,00 m</strong> | Profondeur : <strong>1,10 m</strong></div>
+        <div class="metric">Section mouillée ($S_1$) : <strong>6,60 m²</strong></div>
+        <div class="metric">Vitesse moyenne ($V_1$) : <strong>0,09 m/s</strong></div>
+        <div class="metric">Substrat : Limons et vases fines</div>
+        <div class="metric">Colmatage du fond : <span class="highlight">85 %</span></div>
+        <div class="badge" style="margin-top:8px;">Faciès : Mouille homogène</div>
+      </div>
+      <div class="card">
+        <h3>Profil B (80 m aval — témoin)</h3>
+        <div class="metric">Largeur : <strong>3,20 m</strong> | Profondeur : <strong>0,32 m</strong></div>
+        <div class="metric">Section mouillée ($S_2$) : <strong>1,02 m²</strong></div>
+        <div class="metric">Vitesse moyenne ($V_2$) : <strong>0,58 m/s</strong></div>
+        <div class="metric">Substrat : Sables, graviers et galets</div>
+        <div class="metric">Colmatage du fond : <strong>&lt; 10 %</strong></div>
+        <div class="badge" style="margin-top:8px;">Faciès : Radier vif</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Étape 2 : Calcul -->
+  <div class="tab-content" id="tab-1">
+    <h2>Vérification du débit ($Q = S \cdot V$)</h2>
+    <div class="calc-box">
+      <p style="margin-bottom: 12px; font-size: 0.9rem;">
+        Calculez le débit pour chaque profil à l'aide de la formule du cours :
+      </p>
+      <div style="margin-bottom: 8px;">
+        <label>Débit amont ($Q_1 = 6{,}60 \times 0{,}09$) : </label>
+        <input type="number" id="q1-input" step="0.01" placeholder="m³/s">
+      </div>
+      <div style="margin-bottom: 8px;">
+        <label>Débit aval ($Q_2 = 1{,}02 \times 0{,}58$) : </label>
+        <input type="number" id="q2-input" step="0.01" placeholder="m³/s">
+      </div>
+      <button class="action-btn" onclick="checkFlow()">Vérifier les calculs</button>
+      <div id="flow-result" style="margin-top: 10px; font-weight: 600; font-size: 0.9rem;"></div>
+    </div>
+  </div>
+
+  <!-- Étape 3 : Cadre réglementaire -->
+  <div class="tab-content" id="tab-2">
+    <h2>Les règles juridiques applicables</h2>
+    <div class="card" style="margin: 12px 0;">
+      <h3 style="color: #0f766e;">Extrait de l'article 4 du règlement du SAGE de l'Orge</h3>
+      <p style="font-size: 0.9rem; line-height: 1.4;">
+        « Les ouvrages transversaux existants non indispensables à des usages économiques majeurs doivent faire l'objet d'aménagements afin de rétablir la continuité écologique et le transit sédimentaire naturel. Les travaux ne doivent entraîner aucune aggravation du risque d'inondation à l'aval. »
+      </p>
+    </div>
+    <div class="card">
+      <h3 style="color: #b91c1c;">Article L. 212-5-2 du Code de l'environnement</h3>
+      <p style="font-size: 0.9rem; line-height: 1.4;">
+        Le règlement du SAGE est <strong>opposable aux tiers</strong> : ses prescriptions s'imposent à toute personne publique ou privée, y compris les propriétaires riverains.
+      </p>
+    </div>
+  </div>
+
+  <!-- Étape 4 : Débat CLE -->
+  <div class="tab-content" id="tab-3">
+    <h2>Les 4 rôles pour la Commission Locale de l'Eau</h2>
+    <div class="roles-grid">
+      <div class="role-card role-gemapi">
+        <div class="role-title" style="color: #0284c7;">Techniciens GEMAPI (EPCI)</div>
+        <p style="font-size: 0.85rem;">Défendent l'arasement au nom de l'atteinte du bon état DCE et de la décongestion du lit mineur.</p>
+      </div>
+      <div class="role-card role-peche">
+        <div class="role-title" style="color: #16a34a;">Fédération de Pêche (FDAAPPMA)</div>
+        <p style="font-size: 0.85rem;">Exigent la recréation de frayères sur graviers et le curage préalable des vases pour protéger l'aval.</p>
+      </div>
+      <div class="role-card role-riverain">
+        <div class="role-title" style="color: #ea580c;">Propriétaire & Riverains</div>
+        <p style="font-size: 0.85rem;">Inquiets de l'assèchement de la nappe alluviale superficielle et d'une perte d'esthétique paysagère.</p>
+      </div>
+      <div class="role-card role-police">
+        <div class="role-title" style="color: #dc2626;">Police de l'eau (DDT / OFB)</div>
+        <p style="font-size: 0.85rem;">Rappellent l'opposabilité aux tiers du règlement du SAGE et instruisent la conformité légale.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openTab(index) {
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
+    tabs.forEach((tab, i) => tab.classList.toggle('active', i === index));
+    contents.forEach((content, i) => content.classList.toggle('active', i === index));
+  }
+
+  function checkFlow() {
+    const q1 = parseFloat(document.getElementById('q1-input').value);
+    const q2 = parseFloat(document.getElementById('q2-input').value);
+    const res = document.getElementById('flow-result');
+    
+    if (Math.abs(q1 - 0.59) < 0.03 && Math.abs(q2 - 0.59) < 0.03) {
+      res.style.color = '#16a34a';
+      res.innerHTML = "Résultats corrects : Q ≈ 0,59 m³/s. Le débit se conserve le long du bief ! L'ouvrage n'altère pas le débit mais élargit la section et effondre la vitesse d'écoulement.";
+    } else {
+      res.style.color = '#dc2626';
+      res.innerHTML = "Valeurs incorrectes ou incomplètes. Rappel : Q = S × V (6,60 × 0,09 et 1,02 × 0,58).";
+    }
+  }
+</script>
+
+</body>
+</html>
