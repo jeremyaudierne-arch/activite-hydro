@@ -15,12 +15,12 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background-color: var(--bg); color: var(--text); padding: 20px; display: flex; justify-content: center; }
-    .container { width: 100%; max-width: 900px; background: var(--card-bg); border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border: 1px solid var(--border); overflow: hidden; }
+    .container { width: 100%; max-width: 920px; background: var(--card-bg); border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border: 1px solid var(--border); overflow: hidden; }
     header { background: var(--primary); color: white; padding: 20px; text-align: center; }
     header h1 { font-size: 1.4rem; margin-bottom: 6px; }
     header p { font-size: 0.9rem; opacity: 0.9; }
-    .tabs { display: flex; border-bottom: 1px solid var(--border); background: #f1f5f9; }
-    .tab-btn { flex: 1; padding: 12px; border: none; background: none; font-weight: 600; font-size: 0.85rem; cursor: pointer; color: #64748b; transition: all 0.2s; }
+    .tabs { display: flex; border-bottom: 1px solid var(--border); background: #f1f5f9; flex-wrap: wrap; }
+    .tab-btn { flex: 1; min-width: 140px; padding: 12px; border: none; background: none; font-weight: 600; font-size: 0.85rem; cursor: pointer; color: #64748b; transition: all 0.2s; text-align: center; }
     .tab-btn.active { color: var(--primary); background: var(--card-bg); border-bottom: 3px solid var(--primary); }
     .tab-content { display: none; padding: 24px; animation: fadeIn 0.3s ease; }
     .tab-content.active { display: block; }
@@ -42,6 +42,15 @@
     .role-police { border-color: #dc2626; }
     .role-title { font-weight: bold; font-size: 0.95rem; margin-bottom: 6px; }
     .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: bold; background: #e2e8f0; margin-bottom: 6px; }
+    
+    /* Styles spécifiques glossaire et contexte */
+    .context-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+    .context-box h3 { color: #166534; font-size: 1rem; margin-bottom: 8px; }
+    .context-box p { font-size: 0.9rem; line-height: 1.5; color: #1e293b; }
+    .glossary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+    .glossary-item { background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px; }
+    .glossary-term { font-weight: bold; color: var(--primary); font-size: 0.9rem; margin-bottom: 4px; }
+    .glossary-def { font-size: 0.85rem; color: #475569; line-height: 1.4; }
   </style>
 </head>
 <body>
@@ -49,50 +58,89 @@
 <div class="container">
   <header>
     <h1>Arbitrage en CLE : Le radier du Moulin</h1>
-    <p>Session technique et réglementaire — Bassin versant de l'Orge</p>
+    <p>Session hydrodynamique et réglementaire — Bassin versant de l'Orge amont</p>
   </header>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="openTab(0)">1. Diagnostic terrain</button>
-    <button class="tab-btn" onclick="openTab(1)">2. Calcul de débit</button>
-    <button class="tab-btn" onclick="openTab(2)">3. Cadre légal</button>
-    <button class="tab-btn" onclick="openTab(3)">4. Jeu de rôle (CLE)</button>
+    <button class="tab-btn active" onclick="openTab(0)">1. Contexte & Définitions</button>
+    <button class="tab-btn" onclick="openTab(1)">2. Diagnostic terrain</button>
+    <button class="tab-btn" onclick="openTab(2)">3. Calcul de débit</button>
+    <button class="tab-btn" onclick="openTab(3)">4. Cadre réglementaire</button>
+    <button class="tab-btn" onclick="openTab(4)">5. Jeu de rôle (CLE)</button>
   </div>
 
-  <!-- Étape 1 : Diagnostic -->
+  <!-- Onglet 1 : Contexte et Définitions -->
   <div class="tab-content active" id="tab-0">
+    <div class="context-box">
+      <h3>Contexte écologique et territorial</h3>
+      <p>
+        Sur le bassin versant de l'Orge amont, un ancien clapet de moulin non manœuvré (hauteur de chute : 1,40 m) bloque le transit sédimentaire et le déplacement des espèces piscicoles rhéophiles (truite fario, chabot). En amont, l'effet de remous a transformé un écoulement vif naturel en une vaste retenue lente et colmatée. La collectivité compétente en GEMAPI souhaite engager l'arasement ou le dérasement de l'ouvrage pour rétablir le bon état écologique fixé par la Directive Cadre sur l'Eau (DCE), mais fait face au refus du propriétaire et à l'inquiétude des riverains.
+      </p>
+    </div>
+
+    <h2 style="font-size: 1.1rem; margin-top: 16px;">Lexique technique et réglementaire</h2>
+    <div class="glossary-grid">
+      <div class="glossary-item">
+        <div class="glossary-term">Faciès d'écoulement</div>
+        <div class="glossary-def">Unité morphologique élémentaire du lit d'un cours d'eau caractérisée par une profondeur et une vitesse homogènes (ex. radier vif, mouille calme, plat courant).</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Radier vs Mouille</div>
+        <div class="glossary-def"><strong>Radier :</strong> zone peu profonde, à courant rapide et substrat grossier (oxygénation, frayères).<br><strong>Mouille :</strong> zone profonde et lente retenant les éléments fins.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Colmatage du substrat</div>
+        <div class="glossary-def">Infiltration de particules fines (limons, argiles, sables) dans les interstices du lit de graviers, asphyxiant les pontes de poissons et les macro-invertébrés benthiques.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Continuité écologique</div>
+        <div class="glossary-def">Libre circulation des organismes vivants (poissons, amphibiens) et transport naturel des sédiments (sables, galets), tant sur l'axe longitudinal qu'avec le lit majeur.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Compétence GEMAPI</div>
+        <div class="glossary-def">Gestion des Milieux Aquatiques et Prévention des Inondations : compétence obligatoire confiée aux intercommunalités (EPCI) pour entretenir les berges et lutter contre les crues.</div>
+      </div>
+      <div class="glossary-item">
+        <div class="glossary-term">Opposabilité aux tiers</div>
+        <div class="glossary-def">Règle juridique conférant à un texte force obligatoire envers toute personne (privée comme publique). Nul particulier ou riverain ne peut s'y soustraire.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Onglet 2 : Diagnostic -->
+  <div class="tab-content" id="tab-1">
     <h2>Relevés des stations de mesure</h2>
     <p style="margin: 8px 0; font-size: 0.9rem; color: #64748b;">
-      Un ancien clapet de moulin (chute : 1,40 m) perturbe le tronçon. Deux profils ont été mesurés à l'étiage :
+      Deux profils en travers ont été levés par temps sec lors d'un débit d'étiage stable :
     </p>
     <div class="grid">
       <div class="card">
-        <h3>Profil A (50 m amont — remous)</h3>
+        <h3>Profil A (50 m amont — zone de remous)</h3>
         <div class="metric">Largeur : <strong>6,00 m</strong> | Profondeur : <strong>1,10 m</strong></div>
         <div class="metric">Section mouillée (S<sub>1</sub>) : <strong>6,60 m²</strong></div>
         <div class="metric">Vitesse moyenne (V<sub>1</sub>) : <strong>0,09 m/s</strong></div>
         <div class="metric">Substrat : Limons et vases fines</div>
         <div class="metric">Colmatage du fond : <span class="highlight">85 %</span></div>
-        <div class="badge" style="margin-top:8px;">Faciès : Mouille homogène</div>
+        <div class="badge" style="margin-top:8px;">Faciès : Mouille surdimensionnée</div>
       </div>
       <div class="card">
-        <h3>Profil B (80 m aval — témoin)</h3>
+        <h3>Profil B (80 m aval — témoin non perturbé)</h3>
         <div class="metric">Largeur : <strong>3,20 m</strong> | Profondeur : <strong>0,32 m</strong></div>
         <div class="metric">Section mouillée (S<sub>2</sub>) : <strong>1,02 m²</strong></div>
         <div class="metric">Vitesse moyenne (V<sub>2</sub>) : <strong>0,58 m/s</strong></div>
         <div class="metric">Substrat : Sables, graviers et galets</div>
         <div class="metric">Colmatage du fond : <strong>&lt; 10 %</strong></div>
-        <div class="badge" style="margin-top:8px;">Faciès : Radier vif</div>
+        <div class="badge" style="margin-top:8px;">Faciès : Radier vif fonctionnel</div>
       </div>
     </div>
   </div>
 
-  <!-- Étape 2 : Calcul -->
-  <div class="tab-content" id="tab-1">
+  <!-- Onglet 3 : Calcul -->
+  <div class="tab-content" id="tab-2">
     <h2>Vérification du débit (Q = S · V)</h2>
     <div class="calc-box">
       <p style="margin-bottom: 12px; font-size: 0.9rem;">
-        Calculez le débit pour chaque profil à l'aide de la formule du cours :
+        Calculez le débit instantané pour chaque section à partir de la formule du cours :
       </p>
       <div style="margin-bottom: 8px;">
         <label>Débit amont (Q<sub>1</sub> = 6,60 × 0,09) : </label>
@@ -107,42 +155,42 @@
     </div>
   </div>
 
-  <!-- Étape 3 : Cadre réglementaire -->
-  <div class="tab-content" id="tab-2">
+  <!-- Onglet 4 : Cadre réglementaire -->
+  <div class="tab-content" id="tab-3">
     <h2>Les règles juridiques applicables</h2>
     <div class="card" style="margin: 12px 0;">
       <h3 style="color: #0f766e;">Extrait de l'article 4 du règlement du SAGE de l'Orge</h3>
       <p style="font-size: 0.9rem; line-height: 1.4;">
-        « Les ouvrages transversaux existants non indispensables à des usages économiques majeurs doivent faire l'objet d'aménagements afin de rétablir la continuité écologique et le transit sédimentaire naturel. Les travaux ne doivent entraîner aucune aggravation du risque d'inondation à l'aval. »
+        « Les ouvrages transversaux existants non indispensables à des usages économiques majeurs doivent faire l'objet d'aménagements (dérasement, arasement ou passes rustiques) afin de rétablir la continuité écologique et le transit sédimentaire naturel. Les travaux engagés ne doivent entraîner aucune aggravation du risque d'inondation à l'aval. »
       </p>
     </div>
     <div class="card">
       <h3 style="color: #b91c1c;">Article L. 212-5-2 du Code de l'environnement</h3>
       <p style="font-size: 0.9rem; line-height: 1.4;">
-        Le règlement du SAGE est <strong>opposable aux tiers</strong> : ses prescriptions s'imposent à toute personne publique ou privée, y compris les propriétaires riverains.
+        Le règlement du SAGE et ses documents cartographiques sont <strong>opposables à toute personne publique ou privée</strong> pour l'exécution de toute installation, ouvrage, travaux ou activités visés par la police de l'eau.
       </p>
     </div>
   </div>
 
-  <!-- Étape 4 : Débat CLE -->
-  <div class="tab-content" id="tab-3">
-    <h2>Les 4 rôles pour la Commission Locale de l'Eau</h2>
+  <!-- Onglet 5 : Débat CLE -->
+  <div class="tab-content" id="tab-4">
+    <h2>Les 4 collèges pour la Commission Locale de l'Eau</h2>
     <div class="roles-grid">
       <div class="role-card role-gemapi">
         <div class="role-title" style="color: #0284c7;">Techniciens GEMAPI (EPCI)</div>
-        <p style="font-size: 0.85rem;">Défendent l'arasement au nom de l'atteinte du bon état DCE et de la décongestion du lit mineur.</p>
+        <p style="font-size: 0.85rem;">Défendent l'arasement au nom de l'atteinte du bon état DCE et de la réactivation de la dynamique d'auto-épuration du cours d'eau.</p>
       </div>
       <div class="role-card role-peche">
         <div class="role-title" style="color: #16a34a;">Fédération de Pêche (FDAAPPMA)</div>
-        <p style="font-size: 0.85rem;">Exigent la recréation de frayères sur graviers et le curage préalable des vases pour protéger l'aval.</p>
+        <p style="font-size: 0.85rem;">Exigent la restauration de frayères d'eaux vives et le dragage des vases amont avant ouverture pour protéger le radier aval.</p>
       </div>
       <div class="role-card role-riverain">
         <div class="role-title" style="color: #ea580c;">Propriétaire & Riverains</div>
-        <p style="font-size: 0.85rem;">Inquiets de l'assèchement de la nappe alluviale superficielle et d'une perte d'esthétique paysagère.</p>
+        <p style="font-size: 0.85rem;">Craintes de rabattement de la nappe superficielle, assèchement de puits d'arrosage et perte de la valeur paysagère du plan d'eau.</p>
       </div>
       <div class="role-card role-police">
         <div class="role-title" style="color: #dc2626;">Police de l'eau (DDT / OFB)</div>
-        <p style="font-size: 0.85rem;">Rappellent l'opposabilité aux tiers du règlement du SAGE et instruisent la conformité légale.</p>
+        <p style="font-size: 0.85rem;">Rappellent l'opposabilité aux tiers du règlement du SAGE et instruisent la conformité du dossier de déclaration/autorisation loi sur l'eau.</p>
       </div>
     </div>
   </div>
